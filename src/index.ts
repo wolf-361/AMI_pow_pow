@@ -1,3 +1,5 @@
+import initHost from './routes/host';
+
 var express = require('express');
 var app = express();
 
@@ -11,9 +13,15 @@ app.get('/', function(req, res) {
   res.render('pages/index');
 });
 
-// about page
-app.get('/about', function(req, res) {
-  res.render('pages/about');
+// Player page
+app.get('/player', function(req, res) {
+    res.render('pages/player');
+});
+
+// Host page
+app.get('/host', function(req, res) {
+    // Generate a unique Code to connect to the host
+    
 });
 
 app.listen(8080);
