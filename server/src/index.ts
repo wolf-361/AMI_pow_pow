@@ -46,6 +46,26 @@ io.on('connection', (socket) => {
         console.log(`Game ${game.gameCode} created`);
         socket.emit("createGameResponse", game.gameCode);
     });
+
+    // When a player joins a game by sending the game code
+    socket.on("joinGame", (gameCode: string) => {
+
+        // Find the game and the player
+        const game = games.find((g) => g.gameCode === gameCode);
+        const player = players.find((p) => p.socketId === socket.id);
+
+        if (game && player) {
+        // If the game and the player exist, add the player to the game
+
+            game.players.push(player);
+            console.log(`Player ${player.username} joined game ${game.gameCode}`);
+            io.emit("joinGameResponse", game.gameCode, game.players.length);
+            // Use "io" instead of "socket" to send the message to all the clients
+
+        } else {
+            socket.emit("joinGameResponse", null);
+        }
+    });
 });
 
 io.listen(3001);
