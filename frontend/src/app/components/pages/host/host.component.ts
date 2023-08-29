@@ -10,7 +10,7 @@ export class HostComponent implements OnInit {
   public gameCode: string = '';
   public players?: { username: string }[];
   public scores?: { username: string, score: number }[];
-  public displayedColumns: string[] = ['username'];
+  public isGameFinished: boolean = false;
  
   constructor(
     private apiService: ApiService
@@ -46,8 +46,27 @@ export class HostComponent implements OnInit {
       this.apiService.getGameScores(this.gameCode).then((scores: { username: string, score: number }[]) => {
         if (scores.length > 0) {
           this.scores = scores;
+
+          // Check if the game is finished (every score is not 0)
+          this.isGameFinished = scores.every((score: { username: string, score: number }) => {
+            return score.score !== 0;
+          });          
         }
       });
     }, 1000);
+  }
+
+  public restartGame(): void {
+    // Reset the variables without changing the gameCode
+    this.players = undefined;
+    this.scores = undefined;
+    this.isGameFinished = false;
+
+    // Reset the players scores
+    this.apiService.resetGame(this.gameCode).then((success: boolean) => {
+      if (!success) {
+        alert('Game could not be restarted');
+      }
+    });
   }
 }

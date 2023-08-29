@@ -40,7 +40,7 @@
   <ng-template #noScores>
       <p class="headline-5">Aucun joueur n'a terminé sa partie</p>
   </ng-template>
-  <button >Recommancer une partie</button>
+  <button mat-raised-button color="accent" (click)="restartGame()" [disabled]="!this.isGameFinished">Continuer</button>
   <div class="spacer"></div>
 </div>
 

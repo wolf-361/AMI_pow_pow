@@ -127,4 +127,17 @@ export class ApiService {
       });
     });
   }
+
+  /**
+   * Reset a game data
+   * @param gameCode The game code
+   * @returns True if the game was reset successfully
+   */
+  public resetGame(gameCode: string): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('resetGame', gameCode, (success: boolean) => {
+        resolve(success);
+      });
+    });
+  }
 }
