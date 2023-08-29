@@ -9,7 +9,7 @@
   min-height: var(--page-height)
 }
 
-.player-list {
+.list {
   width: 50%;
 }
 
@@ -23,7 +23,7 @@ table td {
 }
 
 @media screen and (max-width: 768px) {
-  .player-list {
+  .list {
     width: 90%;
   }
 }

@@ -3,14 +3,14 @@
   <h2 class="mat-headline-3">Utiliser le code suivant pour rejoindre la partie</h2>
   <!-- Amélioration, code QR -->
   <h1 class="mat-headline-2">{{ this.gameCode }}</h1>
-  <div class="player-list">
+  <div class="list">
       <table mat-table [dataSource]="this.players" class="mat-elevation-z8" *ngIf="this.players; else noPlayers">           
           <ng-container matColumnDef="username">
             <th mat-header-cell *matHeaderCellDef> Joueurs </th>
             <td mat-cell *matCellDef="let element"> {{element.username}} </td>
           </ng-container>
         
-          <tr mat-header-row matHeaderRowDef="'username'"></tr>
+          <tr mat-header-row *matHeaderRowDef="['username']"></tr>
           <tr mat-row *matRowDef="let row; columns: ['username'];"></tr>
         </table>
         
@@ -23,24 +23,31 @@
 </div>
 <div class="game-score" *ngIf="this.scores">
   <div class="spacer"></div>
-  <h2 class="mat-headline-3">Score</h2>
-  <table mat-table [dataSource]="this.scores" class="mat-elevation-z8" *ngIf="this.scores; else noScores">           
-    <ng-container matColumnDef="username">
-      <th mat-header-cell *matHeaderCellDef> Joueurs </th>
-      <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-    </ng-container>
-    <ng-container matColumnDef="score">
-      <th mat-header-cell *matHeaderCellDef> Score </th>
-      <td mat-cell *matCellDef="let element"> {{element.score}} </td>
-    </ng-container>
-    <tr mat-header-row matHeaderRowDef="'username', 'score'"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['username', 'score'];"></tr>
-  </table>
-  
-  <ng-template #noScores>
-      <p class="headline-5">Aucun joueur n'a terminé sa partie</p>
-  </ng-template>
+
+  <div class="list">
+    <h2 class="mat-headline-3">Score</h2>
+
+    <table mat-table [dataSource]="this.scores" class="mat-elevation-z8" *ngIf="this.scores; else noScores">           
+      <ng-container matColumnDef="username">
+        <th mat-header-cell *matHeaderCellDef> Joueurs </th>
+        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+      </ng-container>
+      <ng-container matColumnDef="score">
+        <th mat-header-cell *matHeaderCellDef> Score </th>
+        <td mat-cell *matCellDef="let element"> {{element.score}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="['username', 'score']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['username', 'score'];"></tr>
+    </table>
+    
+    <ng-template #noScores>
+        <p class="headline-5">Aucun joueur n'a terminé sa partie</p>
+    </ng-template>
+  </div>
+ 
   <button mat-raised-button color="accent" (click)="restartGame()" [disabled]="!this.isGameFinished">Jouer une autre partie</button>
+  <button mat-raised-button color="primary" (click)="restartGame()" [disabled]="!this.isGameFinished">Ignorer les joueurs manquant</button>
+  
   <div class="spacer"></div>
 </div>
 
