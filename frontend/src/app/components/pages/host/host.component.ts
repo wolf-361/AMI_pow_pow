@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
 import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
@@ -10,11 +9,11 @@ import { ApiService } from 'src/app/services/api/api.service';
 export class HostComponent implements OnInit {
   public gameCode: string = '';
   public players?: { username: string }[];
+  public scores?: { username: string, score: number }[];
   public displayedColumns: string[] = ['username'];
  
   constructor(
-    private apiService: ApiService,
-    private socket: Socket,
+    private apiService: ApiService
     ) { }
 
   ngOnInit(): void {
@@ -42,7 +41,13 @@ export class HostComponent implements OnInit {
       }
     });
 
-    // Show that the game has started and subscribe to end for every player
-    console.log('Game started ' + this.gameCode);
+    // Once the game is started, show the score board and update it every second
+    setInterval(() => {
+      this.apiService.getGameScores(this.gameCode).then((scores: { username: string, score: number }[]) => {
+        if (scores.length > 0) {
+          this.scores = scores;
+        }
+      });
+    }, 1000);
   }
 }

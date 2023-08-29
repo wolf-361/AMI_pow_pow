@@ -103,13 +103,27 @@ export class ApiService {
   /**
    * Send the player score to the server
    * @param playerId Player ID
+   * @param gameCode Game code
    * @param score Number of taps
    * @returns True if the player score was sent successfully
    */
-  public sendPlayerScore(playerId: string, score: number): Promise<boolean> {
+  public sendPlayerScore(playerId: string, gameCode: string, score: number): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.socket.emit('sendPlayerScore', playerId, score, (success: boolean) => {
+      this.socket.emit('sendPlayerScore', { playerId: playerId, score: score }, (success: boolean) => {
         resolve(success);
+      });
+    });
+  }
+
+  /**
+   * Get the game scores
+   * @param gameCode The game code
+   * @returns A promise that resolves to an array of objects with the username and score of each player
+   */
+  public getGameScores(gameCode: string): Promise<{ username: string, score: number }[]> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('getGameScores', gameCode, (scores: { username: string, score: number }[]) => {
+        resolve(scores);
       });
     });
   }

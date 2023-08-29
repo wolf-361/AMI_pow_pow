@@ -8,6 +8,10 @@ div {
   right: 0;
 }
 
+.main-toolbar {
+  height: var(--toolbar-height);
+}
+
 .mobile .main-toolbar {
   // Want toolbar to be fixed when on mobile
   position: fixed;

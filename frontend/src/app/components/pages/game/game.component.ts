@@ -10,8 +10,9 @@ import { ApiService } from 'src/app/services/api/api.service';
 })
 export class GameComponent implements OnInit {
   public gameCode: string = '';
-  public isGameStarted!: BehaviorSubject<boolean>;
+  public counter: number = 0;
 
+  private isGameStarted!: BehaviorSubject<boolean>;
   private secondsToTap: number = 3; // The number of seconds to count taps for
 
   constructor(
@@ -52,7 +53,7 @@ export class GameComponent implements OnInit {
         }
 
         // Send the number of taps to the server
-        this.apiService.sendPlayerScore(playerId, taps).then((success: boolean) => {
+        this.apiService.sendPlayerScore(playerId, this.gameCode, taps).then((success: boolean) => {
           if (!success) {
             alert('Could not send player score');
             return;
@@ -71,6 +72,8 @@ export class GameComponent implements OnInit {
    * @returns The number of taps in the given number of seconds
    */
   public countTaps(seconds: number): number {
+
+
     var count = 0;
     var startTime = new Date().getTime();
     var endTime = startTime + seconds * 1000;
@@ -82,5 +85,16 @@ export class GameComponent implements OnInit {
     }
     return count;
   }
+  
+  public countdown(seconds: number): void {
+    var counter = seconds;
+    var interval = setInterval(() => {
+      this.counter = counter;
+      counter--;
 
+      if (counter < 0) {
+        clearInterval(interval);
+      }
+    }, 1000);
+  }
 }

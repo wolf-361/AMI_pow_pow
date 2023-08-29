@@ -1,9 +1,11 @@
+
+
 :host {
     display: block;
     width: 100%;
-    height: fit-content;
-    position: absolute;
-    bottom: 0;
+    height: var(--footer-height);
+    position: relative;
+    bottom: var(--footer-height)
 }
 
 footer {

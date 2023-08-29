@@ -1,15 +1,20 @@
-:host {
+.start-game,
+.game-score {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   align-items: center;
   justify-content: center;
   text-align: center;
-  min-height: 100%;
+  min-height: var(--page-height)
 }
 
 .player-list {
   width: 50%;
+}
+
+.spacer {
+  height: 2rem;
 }
 
 table th,

@@ -33,6 +33,20 @@ export class Game {
      */
     public startGame(): void {
         this._isLive.next(true);
+
+        // Listen for every player's score every second till they all have a score
+        const scoreListener = setInterval(() => {
+            // If the game is not live, stop listening
+            if (!this._isLive.value) {
+                clearInterval(scoreListener);
+            }
+
+            // If all players have a score, stop listening
+            if (this._players.every(player => player.score !== 0)) {
+                clearInterval(scoreListener);
+                this.endGame();
+            }
+        }, 1000);
     }
 
     /**
@@ -70,6 +84,15 @@ export class Game {
         this._players.push(player);
         player.game = this;
         return true;
+    }
+
+    /**
+     * Get a specific player
+     * @param username The player's username
+     * @returns The player with the specified username
+     */
+    public getPlayer(username: string): Player {
+        return this._players.find(player => player.username === username);
     }
 
     /**
