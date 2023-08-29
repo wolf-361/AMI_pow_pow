@@ -13,7 +13,6 @@ export class GamesService {
     }
 
     public registerPlayer(username: string, gameCode: string): boolean {
-        console.log(`Registering player ${username} in game ${gameCode}`);
         // Find the game with the given game code
         const game = this.getGame(gameCode);
 

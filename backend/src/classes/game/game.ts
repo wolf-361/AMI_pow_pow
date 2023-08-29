@@ -24,13 +24,22 @@ export class Game {
         return this._isLive;
     }
 
-    public set isLive(isLive: boolean) {
-        this._isLive.next(isLive);
-        console.log(`Game ${this.code} is live: ${isLive}`);
-    }
-
     public get players(): Player[] {
         return this._players;
+    }
+
+    /**
+     * Start the game
+     */
+    public startGame(): void {
+        this._isLive.next(true);
+    }
+
+    /**
+     * End the game
+     */
+    public endGame(): void {
+        this._isLive.next(false);
     }
 
     /**
