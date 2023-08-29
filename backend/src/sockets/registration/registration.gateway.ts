@@ -10,7 +10,7 @@ export class RegistrationGateway {
     private playersService: PlayersService,
   ) {}
 
-  @SubscribeMessage('registration')
+  @SubscribeMessage('registerPlayer')
   handleMessage(
     @MessageBody() username: string
     ): boolean {

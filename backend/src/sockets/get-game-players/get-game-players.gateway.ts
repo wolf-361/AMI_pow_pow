@@ -12,6 +12,10 @@ export class GetGamePlayersGateway {
   handleMessage(@MessageBody() gameCode: string): string[] {
     const game = this.gamesService.getGame(gameCode);
 
+    if (!game) {
+      return [];
+    }
+
     return game.players.map(player => player.username);
   }
 

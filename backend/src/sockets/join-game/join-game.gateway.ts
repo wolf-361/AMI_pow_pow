@@ -18,8 +18,8 @@ export class JoinGameGateway {
 
   @SubscribeMessage('join-game')
   handleMessage(
+    @MessageBody() username: string,
     @MessageBody() gameCode: string,
-    @ConnectedSocket() client: Socket,
   ): boolean {
     // Find the game with the given game code
     const game = this.gamesService.getGame(gameCode);
@@ -30,7 +30,7 @@ export class JoinGameGateway {
     }
 
     // Find the player
-    const player = this.playersService.getPlayer(client.id);
+    const player = this.playersService.getPlayer(username);
 
     // If the player doesn't exist, return false
     if (!player) {
