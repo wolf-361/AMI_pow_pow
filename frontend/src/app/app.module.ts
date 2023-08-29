@@ -25,7 +25,6 @@ import { FooterComponent } from './components/layout/footer/footer.component';
 
 import { HomeComponent } from './components/pages/home/home.component';
 import { HostComponent } from './components/pages/host/host.component';
-import { PlayerComponent } from './components/pages/player/player.component';
 import { JoinGameComponent } from './components/pages/join-game/join-game.component';
 import { GameComponent } from './components/pages/game/game.component';
 
@@ -35,7 +34,6 @@ import { GameComponent } from './components/pages/game/game.component';
     FooterComponent,
     HomeComponent,
     HostComponent,
-    PlayerComponent,
     JoinGameComponent,
     GameComponent,
   ],
