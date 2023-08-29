@@ -19,6 +19,19 @@ div .sidenav-container {
   flex: 1;
 }
 
+.logo {
+  // Center
+  margin: auto;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: #3f3f3f;
+}
+
+.nav-item {
+  margin: 0 16px;
+}
+
 .mobile .sidenav-container {
   // Want body to be scrollable when on mobile
   flex: 1 0 auto;

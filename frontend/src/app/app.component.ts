@@ -8,6 +8,11 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class AppComponent implements OnDestroy {
   public mobileQuery: MediaQueryList;
+  public navLinks = [
+    { path: '/home', label: 'Home', icon: 'home' },
+    { path: '/host', label: 'Host', icon: 'add_circle' },
+    { path: '/join-game', label: 'Join Game', icon: 'videogame_asset' },
+  ]
 
   private _mobileQueryListener: () => void;
 
