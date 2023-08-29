@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -33,6 +34,23 @@ export class ApiService {
   }
 
   /**
+   * Subscribe to game start
+   * @param gameCode Game code
+   * @returns A BehaviorSubject that emits true when the game starts
+   */
+  public subscribeToGame(gameCode: string): BehaviorSubject<boolean> {
+    var isGameStarted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+    this.socket.on('gameStarted', (gameCode: string) => {
+      if (gameCode === gameCode) {
+        isGameStarted.next(true);
+      }
+    });
+
+    return isGameStarted;    
+  }
+
+  /**
    * Start the game
    * @param gameCode The game code
    * @returns True if the game was started successfully
@@ -60,8 +78,9 @@ export class ApiService {
           gameCode: gameCode,
         },
         (success: boolean) => {
+          // Store the username in local storage
+          localStorage.setItem('username', username);
           resolve(success);
-          console.log('registerPlayer: ' + success);
         }
       );
     });
@@ -76,6 +95,20 @@ export class ApiService {
   public joinGame(username: string, gameCode: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.socket.emit('joinGame', username, gameCode, (success: boolean) => {
+        resolve(success);
+      });
+    });
+  }
+
+  /**
+   * Send the player score to the server
+   * @param playerId Player ID
+   * @param score Number of taps
+   * @returns True if the player score was sent successfully
+   */
+  public sendPlayerScore(playerId: string, score: number): Promise<boolean> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('sendPlayerScore', playerId, score, (success: boolean) => {
         resolve(success);
       });
     });

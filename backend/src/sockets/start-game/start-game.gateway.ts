@@ -1,30 +1,38 @@
 import { Logger } from '@nestjs/common';
-import { MessageBody, SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
+import { MessageBody, SubscribeMessage, WebSocketGateway, WebSocketServer, WsResponse } from '@nestjs/websockets';
 import { GamesService } from 'src/services/games/games.service';
 
 @WebSocketGateway()
 export class StartGameGateway {
   private logger: Logger = new Logger('StartGameGateway');
 
+  @WebSocketServer() server;
+
   constructor(
     private gamesService: GamesService,
   ) {}
 
   @SubscribeMessage('startGame')
-  handleMessage(@MessageBody() gameCode: string): WsResponse {
+  handleMessage(
+    @MessageBody() gameCode: string,
+    ): boolean {
     const game = this.gamesService.getGame(gameCode);
 
     if (!game) {
-      return { event: 'gameNotFound', data: gameCode };
+      return false;
     }
 
     if (game.players.length < 2) {
-      return { event: 'notEnoughPlayers', data: gameCode };
+      return false;
     }
 
     game.startGame();
     this.logger.log(`Game ${gameCode} started`);
     
-    return { event: 'gameStarted', data: gameCode };
+    // Send the game state to all players 
+    // TODO: Send it only to the players in the game
+    this.server.emit('gameStarted', gameCode);
+
+    return true;
   }
 }

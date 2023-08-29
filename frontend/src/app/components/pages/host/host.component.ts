@@ -12,7 +12,10 @@ export class HostComponent implements OnInit {
   public players?: { username: string }[];
   public displayedColumns: string[] = ['username'];
  
-  constructor(private apiService: ApiService) { }
+  constructor(
+    private apiService: ApiService,
+    private socket: Socket,
+    ) { }
 
   ngOnInit(): void {
     this.apiService.createGame().then((gameCode: string) => {
@@ -33,6 +36,13 @@ export class HostComponent implements OnInit {
   }
 
   public startGame(): void {
+    this.apiService.startGame(this.gameCode).then((success: boolean) => {
+      if (!success) {
+        alert('Game could not be started');
+      }
+    });
 
+    // Show that the game has started and subscribe to end for every player
+    console.log('Game started ' + this.gameCode);
   }
 }
