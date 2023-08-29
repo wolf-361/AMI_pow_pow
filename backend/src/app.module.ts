@@ -10,6 +10,7 @@ import { RegistrationGateway } from './sockets/registration/registration.gateway
 // Services
 import { PlayersService } from './services/players/players.service';
 import { GamesService } from './services/games/games.service';
+import { GetGamePlayersGateway } from './sockets/get-game-players/get-game-players.gateway';
 
 @Module({
   imports: [
@@ -22,6 +23,6 @@ import { GamesService } from './services/games/games.service';
     JoinGameGateway, 
     RegistrationGateway,
     GamesService, 
-    PlayersService,]
+    PlayersService, GetGamePlayersGateway,]
 })
 export class AppModule {}

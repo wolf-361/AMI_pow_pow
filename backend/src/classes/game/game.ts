@@ -28,6 +28,10 @@ export class Game {
         this._isLive.next(isLive);
     }
 
+    public get players(): Player[] {
+        return this._players;
+    }
+
     /**
      * Check if the game has a specific player
      * @param player The player to check
