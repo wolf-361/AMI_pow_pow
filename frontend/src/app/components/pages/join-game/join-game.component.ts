@@ -2,12 +2,18 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'app-player',
-  templateUrl: './player.component.html',
-  styleUrls: ['./player.component.scss'],
+  selector: 'app-join-game',
+  templateUrl: './join-game.component.html',
+  styleUrls: ['./join-game.component.scss']
 })
-export class PlayerComponent {
-  public hostForm: FormGroup = new FormGroup({
+export class JoinGameComponent {
+  public gameForm: FormGroup = new FormGroup({
+    playerName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(20),
+      Validators.pattern('^[a-zA-Z0-9]*$'),
+    ]),
     gameCode: new FormControl('', [
       Validators.required,
       Validators.minLength(4),
@@ -22,16 +28,6 @@ export class PlayerComponent {
    * @example form['email'].value
    */
   get form(): { [key: string]: AbstractControl } {
-    return this.hostForm.controls;
-  }
-
-  constructor() {}
-
-  public onSubmit(): void {
-    if (this.hostForm.invalid) {
-      return;
-    }
-
-    console.log(this.hostForm.value);
+    return this.gameForm.controls;
   }
 }
