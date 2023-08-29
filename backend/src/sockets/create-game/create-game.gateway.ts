@@ -1,5 +1,5 @@
 import { Logger } from '@nestjs/common';
-import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
+import { SubscribeMessage, WebSocketGateway, WsResponse } from '@nestjs/websockets';
 import { GamesService } from 'src/services/games/games.service';
 
 @WebSocketGateway()
@@ -11,11 +11,11 @@ export class CreateGameGateway {
   ) {}
 
   @SubscribeMessage('createGame')
-  handleMessage(): string {
+  handleMessage(): WsResponse<string> {
     const gameId = this.gamesService.createGame();
 
     this.logger.log(`Game created: ${gameId}`);
 
-    return gameId;
+    return { event: 'gameCreated', data: gameId };
   }
 }
