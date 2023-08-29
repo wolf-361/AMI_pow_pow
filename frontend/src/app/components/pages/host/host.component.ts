@@ -8,7 +8,7 @@ import { ApiService } from 'src/app/services/api/api.service';
   styleUrls: ['./host.component.scss']
 })
 export class HostComponent implements OnInit {
-  public gameCode: string | void = '';
+  public gameCode: string = '';
   public players: string[] = [];
  
   constructor(private apiService: ApiService) { }

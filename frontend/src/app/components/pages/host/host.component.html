@@ -1,6 +1,6 @@
 <h2 class="mat-headline-3">Utiliser le code suivant pour rejoindre la partie</h2>
 <h1 class="mat-headline-2">{{ this.gameCode }}</h1>
 <div class="player-list">
-
+    <p *ngFor="let player of this.players">{{ player }}</p>
 </div>
 <button mat-raised-button color="primary" (click)="startGame()">Commencer la partie</button>
