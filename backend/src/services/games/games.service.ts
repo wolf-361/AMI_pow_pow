@@ -72,7 +72,6 @@ export class GamesService {
 
         // Listen to the game's isLive property
         game.isLive.subscribe(isLive => {
-            console.log(`Game ${game.code} is live: ${isLive}`);
             if (isLive) {
                 this.liveGames.push(game);
             } else {

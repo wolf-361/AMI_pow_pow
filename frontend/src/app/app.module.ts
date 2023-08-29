@@ -21,6 +21,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
+import { MatTableModule} from '@angular/material/table';
 
 import { FooterComponent } from './components/layout/footer/footer.component';
 
@@ -49,7 +50,8 @@ import { GameComponent } from './components/pages/game/game.component';
     MatIconModule,
     MatButtonModule,
     MatToolbarModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

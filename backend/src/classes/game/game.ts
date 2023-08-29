@@ -57,10 +57,9 @@ export class Game {
         if (player.isInGame()) {
             throw new Error("Player is already in a game");
         }
+        
         this._players.push(player);
         player.game = this;
-
-        console.log(`Player ${player.username} joined game ${this.code}`);
         return true;
     }
 

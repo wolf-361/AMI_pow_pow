@@ -1,6 +1,19 @@
 <h2 class="mat-headline-3">Utiliser le code suivant pour rejoindre la partie</h2>
 <h1 class="mat-headline-2">{{ this.gameCode }}</h1>
 <div class="player-list">
-    <p *ngFor="let player of this.players">{{ player }}</p>
+    <table mat-table [dataSource]="this.players" class="mat-elevation-z8" *ngIf="this.players; else noPlayers">           
+        <ng-container matColumnDef="username">
+          <th mat-header-cell *matHeaderCellDef> Joueurs </th>
+          <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+        </ng-container>
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      
+    <ng-template #noPlayers>
+        <p class="headline-5">Aucun joueur n'a rejoint la partie</p>
+    </ng-template>
 </div>
-<button mat-raised-button color="primary" (click)="startGame()">Commencer la partie</button>
+<button mat-raised-button color="primary" (click)="startGame()" [disabled]="!this.players">Commencer la partie</button>
+

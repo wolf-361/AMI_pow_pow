@@ -9,7 +9,8 @@ import { ApiService } from 'src/app/services/api/api.service';
 })
 export class HostComponent implements OnInit {
   public gameCode: string = '';
-  public players: string[] = [];
+  public players?: { username: string }[];
+  public displayedColumns: string[] = ['username'];
  
   constructor(private apiService: ApiService) { }
 
@@ -21,8 +22,12 @@ export class HostComponent implements OnInit {
     // Update players list every time 2 seconds
     setInterval(() => {
       this.apiService.getGamePlayers(this.gameCode).then((players: string[]) => {
-        this.players = players;
-        console.log('# of players: ' + this.players.length)
+        if (players.length > 0) {
+          // Update the players list by adding a number to each player
+          this.players = players.map((player: string) => {
+            return { username: player };
+          });
+        }
       });
     }, 2000);
   }
