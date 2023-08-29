@@ -11,11 +11,11 @@ export class CreateGameGateway {
   ) {}
 
   @SubscribeMessage('createGame')
-  handleMessage(): WsResponse<string> {
+  handleMessage(): string {
     const gameId = this.gamesService.createGame();
 
     this.logger.log(`Game created: ${gameId}`);
 
-    return { event: 'gameCreated', data: gameId };
+    return gameId;
   }
 }

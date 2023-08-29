@@ -30,4 +30,13 @@ export class JoinGameComponent {
   get form(): { [key: string]: AbstractControl } {
     return this.gameForm.controls;
   }
+
+  constructor(
+  ) { }
+
+  public submit(): void {
+    if (this.gameForm.valid) {
+      
+    }
+  }
 }

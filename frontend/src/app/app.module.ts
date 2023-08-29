@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Socket.io
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -39,7 +40,8 @@ import { GameComponent } from './components/pages/game/game.component';
     AppRoutingModule,
     SocketIoModule.forRoot(config),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

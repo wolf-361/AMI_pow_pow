@@ -1,4 +1,4 @@
-<form [formGroup]="this.gameForm">
+<form [formGroup]="this.gameForm" onsubmit="this.submit()" novalidate>
     <label for="playerName">Entrer votre nom</label>
     <input type="text" id="playerName" formControlName="playerName" placeholder="Quentin Anière">
     <label for="gameId">Entrer votre numéro de partie</label>
