@@ -1,9 +1,11 @@
+import { generate } from "rxjs";
 import { Game } from "../game/game";
+import { v4 as uuidv4 } from 'uuid';
 
 export class Player {
     private _username: string;
     private _score: number;
-    private _socketId: string;
+    private _id: string;
     private _game: Game | undefined;
 
     /**
@@ -11,10 +13,10 @@ export class Player {
      * @param username The player's username
      * @param socketId The player's socket ID
      */
-    constructor(username: string, socketId: string) {
+    constructor(username: string) {
         this._username = username;
         this._score = 0;
-        this._socketId = socketId;
+        this._id = uuidv4();
     }
 
     public get username(): string {
@@ -25,8 +27,8 @@ export class Player {
         return this._score;
     }
 
-    public get socketId(): string {
-        return this._socketId;
+    public get id(): string {
+        return this._id;
     }
 
     public get game(): Game | undefined {

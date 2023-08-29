@@ -9,15 +9,19 @@ export class PlayersService {
         this.players = [];
     }
 
-    public getPlayer(playerId: string): Player {
-        return this.players.find(player => player.socketId === playerId);
+    public getPlayer(username: string): Player {
+        return this.players.find(player => player.username === username);
     }
 
     public removePlayer(player: Player): void {
         this.players = this.players.filter(p => p !== player);
     }
 
-    public addPlayer(player: Player): void {
+    public addPlayer(player: Player): boolean {
+        if (this.players.find(p => p.username === player.username)) {
+            return false;
+        }
         this.players.push(player);
+        return true;
     } 
 }

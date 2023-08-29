@@ -12,12 +12,10 @@ export class RegistrationGateway {
 
   @SubscribeMessage('registration')
   handleMessage(
-    @MessageBody() username: string,
-    @ConnectedSocket() client: Socket,
+    @MessageBody() username: string
     ): boolean {
-    const player = new Player(username, client.id);
-    this.playersService.addPlayer(player);
+    const player = new Player(username);
 
-    return true;
+    return this.playersService.addPlayer(player);
   }
 }
