@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 // Socket.io
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
@@ -15,7 +14,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HeaderComponent } from './components/layout/header/header.component';
+// Material
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from '@angular/material/toolbar';
+
 import { FooterComponent } from './components/layout/footer/footer.component';
 
 import { HomeComponent } from './components/pages/home/home.component';
@@ -27,13 +32,12 @@ import { GameComponent } from './components/pages/game/game.component';
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     FooterComponent,
     HomeComponent,
     HostComponent,
     PlayerComponent,
     JoinGameComponent,
-    GameComponent
+    GameComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,11 @@ import { GameComponent } from './components/pages/game/game.component';
     SocketIoModule.forRoot(config),
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
