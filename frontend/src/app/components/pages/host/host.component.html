@@ -1,1 +1,6 @@
-<p>Host: {{ gameCode }}</p>
+<h2 class="mat-headline-3">Utiliser le code suivant pour rejoindre la partie</h2>
+<h1 class="mat-headline-2">{{ this.gameCode }}</h1>
+<div class="player-list">
+
+</div>
+<button mat-raised-button color="primary" (click)="startGame()">Commencer la partie</button>

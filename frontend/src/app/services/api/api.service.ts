@@ -5,8 +5,13 @@ import { Socket } from 'ngx-socket-io';
   providedIn: 'root'
 })
 export class ApiService {
+
   constructor(private socket: Socket) { }
 
+  /**
+   * Create a new game and get the game code
+   * @returns Promise<string> gameCode
+   */
   public createGame(): Promise<string> {
     return new Promise((resolve, reject) => {
       this.socket.emit('createGame', (gameCode: string) => {
@@ -14,4 +19,18 @@ export class ApiService {
       });
     });
   }
+
+  /**
+   * Get all player names in a game
+   * @param gameCode The game code
+   * @returns Promise<string[]> players names
+   */
+  public getGamePlayers(gameCode: string): Promise<string[]> {
+    return new Promise((resolve, reject) => {
+      this.socket.emit('getGamePlayers', gameCode, (players: string[]) => {
+        resolve(players);
+      });
+    });
+  }
+  
 }

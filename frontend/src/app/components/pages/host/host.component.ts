@@ -9,6 +9,7 @@ import { ApiService } from 'src/app/services/api/api.service';
 })
 export class HostComponent implements OnInit {
   public gameCode: string | void = '';
+  public players: string[] = [];
  
   constructor(private apiService: ApiService) { }
 
@@ -16,5 +17,16 @@ export class HostComponent implements OnInit {
     this.apiService.createGame().then((gameCode: string) => {
       this.gameCode = gameCode;
     });
+
+    // Update players list every time 2 seconds
+    setInterval(() => {
+      this.apiService.getGamePlayers(this.gameCode).then((players: string[]) => {
+        this.players = players;
+      });
+    }, 2000);
+  }
+
+  public startGame(): void {
+
   }
 }
