@@ -39,7 +39,9 @@ export class ApiService {
    * @returns A BehaviorSubject that emits true when the game starts
    */
   public subscribeToGame(gameCode: string): BehaviorSubject<boolean> {
-    var isGameStarted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    var isGameStarted: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+      false
+    );
 
     this.socket.on('gameStarted', (gameCode: string) => {
       if (gameCode === gameCode) {
@@ -47,7 +49,7 @@ export class ApiService {
       }
     });
 
-    return isGameStarted;    
+    return isGameStarted;
   }
 
   /**
@@ -78,8 +80,6 @@ export class ApiService {
           gameCode: gameCode,
         },
         (success: boolean) => {
-          // Store the username in local storage
-          localStorage.setItem('username', username);
           resolve(success);
         }
       );
@@ -107,11 +107,19 @@ export class ApiService {
    * @param score Number of taps
    * @returns True if the player score was sent successfully
    */
-  public sendPlayerScore(playerId: string, gameCode: string, score: number): Promise<boolean> {
+  public sendPlayerScore(
+    playerId: string,
+    gameCode: string,
+    score: number
+  ): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.socket.emit('sendPlayerScore', { playerId: playerId, score: score }, (success: boolean) => {
-        resolve(success);
-      });
+      this.socket.emit(
+        'sendPlayerScore',
+        { playerId: playerId, score: score },
+        (success: boolean) => {
+          resolve(success);
+        }
+      );
     });
   }
 
@@ -120,11 +128,17 @@ export class ApiService {
    * @param gameCode The game code
    * @returns A promise that resolves to an array of objects with the username and score of each player
    */
-  public getGameScores(gameCode: string): Promise<{ username: string, score: number }[]> {
+  public getGameScores(
+    gameCode: string
+  ): Promise<{ username: string; score: number }[]> {
     return new Promise((resolve, reject) => {
-      this.socket.emit('getGameScores', gameCode, (scores: { username: string, score: number }[]) => {
-        resolve(scores);
-      });
+      this.socket.emit(
+        'getGameScores',
+        gameCode,
+        (scores: { username: string; score: number }[]) => {
+          resolve(scores);
+        }
+      );
     });
   }
 

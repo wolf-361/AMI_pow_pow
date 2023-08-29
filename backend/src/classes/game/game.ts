@@ -57,6 +57,15 @@ export class Game {
     }
 
     /**
+     * Reset the game's data
+     */
+    public resetGameData(): void {
+        this._players.forEach((player) => {
+            player.score = 0;
+        });
+    }
+
+    /**
      * Check if the game has a specific player
      * @param player The player to check
      * @returns True if the player is in the game, false if not

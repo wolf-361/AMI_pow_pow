@@ -13,6 +13,7 @@ import { GamesService } from './services/games/games.service';
 import { StartGameGateway } from './sockets/start-game/start-game.gateway';
 import { SendPlayerScoreGateway } from './sockets/send-player-score/send-player-score.gateway';
 import { GetGameScoresGateway } from './sockets/get-game-scores/get-game-scores.gateway';
+import { ResetGameGateway } from './sockets/reset-game/reset-game.gateway';
 
 @Module({
   imports: [
@@ -25,7 +26,7 @@ import { GetGameScoresGateway } from './sockets/get-game-scores/get-game-scores.
     RegistrationGateway,
     GamesService, 
     GetGamePlayersGateway, 
-    StartGameGateway, SendPlayerScoreGateway, GetGameScoresGateway,
+    StartGameGateway, SendPlayerScoreGateway, GetGameScoresGateway, ResetGameGateway,
   ]
 })
 export class AppModule {}

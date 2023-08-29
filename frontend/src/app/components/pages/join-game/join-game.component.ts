@@ -52,7 +52,7 @@ export class JoinGameComponent {
       }
 
       // Redirect to game
-      window.location.href = `/game/${gameCode}`;
+      window.location.href = `/game/${gameCode}/${username}`;
     });
   }
 }

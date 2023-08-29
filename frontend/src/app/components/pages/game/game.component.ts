@@ -15,6 +15,8 @@ export class GameComponent implements OnInit {
   private isGameStarted!: BehaviorSubject<boolean>;
   private secondsToTap: number = 3; // The number of seconds to count taps for
 
+  private username: string = '';
+
   constructor(
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
@@ -23,6 +25,7 @@ export class GameComponent implements OnInit {
   ngOnInit(): void {
     this.activeRoute.params.subscribe(params => {
       this.gameCode = params['gameCode'];
+      this.username = params['username'];
     });
 
     // If the game code is not valid, redirect to the home page
@@ -39,21 +42,20 @@ export class GameComponent implements OnInit {
         // Count the number of taps on the screen
         var taps: number = this.countTaps(this.secondsToTap);
 
-        // Get the player is
-        var playerId: string = localStorage.getItem('playerId') || '';
-
-        if (playerId === '' || playerId === null) {
-          alert('Player ID not found')
+        // If the username is empty, alert the user and return
+        if (this.username === '') {
+          alert('Could not get username');
           return;
         }
 
+        // If the number of taps is 0, alert the user and return
         if (taps === 0 || taps === null) {
           alert('Could not count taps')
           return;
         }
 
         // Send the number of taps to the server
-        this.apiService.sendPlayerScore(playerId, this.gameCode, taps).then((success: boolean) => {
+        this.apiService.sendPlayerScore(this.username, this.gameCode, taps).then((success: boolean) => {
           if (!success) {
             alert('Could not send player score');
             return;

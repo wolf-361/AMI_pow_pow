@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'host', component: HostComponent },
   { path: 'join-game', component: JoinGameComponent},
-  { path: 'game/:gameCode', component: GameComponent },
+  { path: 'game/:gameCode/:username', component: GameComponent },
   { path: '**', redirectTo: '' },
 
 ];
