@@ -50,6 +50,9 @@ export class JoinGameComponent {
         alert('Username already taken');
         return;
       }
+
+      // Redirect to game
+      window.location.href = `/game/${gameCode}`;
     });
   }
 }
