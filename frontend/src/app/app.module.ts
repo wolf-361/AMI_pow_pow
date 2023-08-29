@@ -22,6 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 import { FooterComponent } from './components/layout/footer/footer.component';
 
@@ -52,6 +54,8 @@ import { GameComponent } from './components/pages/game/game.component';
     MatToolbarModule,
     MatListModule,
     MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]
