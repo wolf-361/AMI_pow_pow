@@ -16,7 +16,7 @@ export class Game {
         this._isLive = new BehaviorSubject(false)
     }
 
-    public get gameCode(): string {
+    public get code(): string {
         return this._gameCode;
     }
 
@@ -26,6 +26,7 @@ export class Game {
 
     public set isLive(isLive: boolean) {
         this._isLive.next(isLive);
+        console.log(`Game ${this.code} is live: ${isLive}`);
     }
 
     public get players(): Player[] {
@@ -47,7 +48,7 @@ export class Game {
      * @returns True if the player was added, false if the player was already in the game
      */
     public addPlayer(player: Player): boolean {
-        if (this._isLive) {
+        if (this._isLive.value) {
             throw new Error("Game is live");
         }
         if (this.hasPlayer(player)) {
@@ -58,6 +59,8 @@ export class Game {
         }
         this._players.push(player);
         player.game = this;
+
+        console.log(`Player ${player.username} joined game ${this.code}`);
         return true;
     }
 

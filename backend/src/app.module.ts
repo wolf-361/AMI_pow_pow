@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+
 // Gateways
 import { SocketsGateway } from './sockets/sockets/sockets.gateway';
 import { CreateGameGateway } from './sockets/create-game/create-game.gateway';
-import { JoinGameGateway } from './sockets/join-game/join-game.gateway';
 import { RegistrationGateway } from './sockets/registration/registration.gateway';
+import { GetGamePlayersGateway } from './sockets/get-game-players/get-game-players.gateway';
 
 // Services
-import { PlayersService } from './services/players/players.service';
 import { GamesService } from './services/games/games.service';
-import { GetGamePlayersGateway } from './sockets/get-game-players/get-game-players.gateway';
 
 @Module({
   imports: [
@@ -20,9 +19,8 @@ import { GetGamePlayersGateway } from './sockets/get-game-players/get-game-playe
     AppService,
     SocketsGateway,
     CreateGameGateway, 
-    JoinGameGateway, 
     RegistrationGateway,
     GamesService, 
-    PlayersService, GetGamePlayersGateway,]
+    GetGamePlayersGateway,]
 })
 export class AppModule {}

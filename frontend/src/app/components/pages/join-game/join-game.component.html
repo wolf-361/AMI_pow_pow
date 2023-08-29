@@ -1,6 +1,8 @@
-<form [formGroup]="this.gameForm" onsubmit="this.submit()" novalidate>
-    <label for="playerName">Entrer votre nom</label>
-    <input type="text" id="playerName" formControlName="playerName" placeholder="Quentin Anière">
-    <label for="gameId">Entrer votre numéro de partie</label>
-    <input type="text" id="gameId" formControlName="gameId" placeholder="ABCD">
+<form [formGroup]="this.gameForm" (ngSubmit)="this.submit()">
+    <label for="username">Entrer votre nom</label>
+    <input type="text" id="username" formControlName="username" placeholder="wolf361">
+    <label for="gameCode">Entrer votre numéro de partie</label>
+    <input type="text" id="gameCode" formControlName="gameCode" placeholder="SAEX">
+
+    <button type="submit" mat-raised-button color="primary">Rejoindre la partie</button>
 </form>

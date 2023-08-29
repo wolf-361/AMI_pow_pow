@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
   selector: 'app-join-game',
@@ -8,7 +9,7 @@ import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/fo
 })
 export class JoinGameComponent {
   public gameForm: FormGroup = new FormGroup({
-    playerName: new FormControl('', [
+    username: new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(20),
@@ -18,7 +19,7 @@ export class JoinGameComponent {
       Validators.required,
       Validators.minLength(4),
       Validators.maxLength(4),
-      Validators.pattern('^[a-zA-Z0-9]*$'),
+      Validators.pattern('^[a-zA-Z]*$'),
     ]),
   });
 
@@ -32,11 +33,23 @@ export class JoinGameComponent {
   }
 
   constructor(
+    private apiService: ApiService,
   ) { }
 
   public submit(): void {
-    if (this.gameForm.valid) {
-      
+    if (!this.gameForm.valid) {
+      console.log("Invalid form");
     }
+
+    var username: string = this.gameForm.value.username;
+    var gameCode: string = this.gameForm.value.gameCode;
+
+    // Register player
+    this.apiService.registerPlayer(username, gameCode).then((success: boolean) => {
+      if (!success) {
+        alert('Username already taken');
+        return;
+      }
+    });
   }
 }

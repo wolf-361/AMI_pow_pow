@@ -22,6 +22,7 @@ export class HostComponent implements OnInit {
     setInterval(() => {
       this.apiService.getGamePlayers(this.gameCode).then((players: string[]) => {
         this.players = players;
+        console.log('# of players: ' + this.players.length)
       });
     }, 2000);
   }

@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
-
-  constructor(private socket: Socket) { }
+  constructor(private socket: Socket) {}
 
   /**
    * Create a new game and get the game code
@@ -35,7 +34,7 @@ export class ApiService {
 
   /**
    * Start the game
-   * @param gameCode The game code 
+   * @param gameCode The game code
    * @returns True if the game was started successfully
    */
   public startGame(gameCode: string): Promise<boolean> {
@@ -49,13 +48,22 @@ export class ApiService {
   /**
    * Register a new player
    * @param username Player username
+   * @param gameCode Game code
    * @returns True if the player was registered successfully
    */
-  public registerPlayer(username: string): Promise<boolean> {
+  public registerPlayer(username: string, gameCode: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.socket.emit('registerPlayer', username, (success: boolean) => {
-        resolve(success);
-      });
+      this.socket.emit(
+        'registerPlayer',
+        {
+          username: username,
+          gameCode: gameCode,
+        },
+        (success: boolean) => {
+          resolve(success);
+          console.log('registerPlayer: ' + success);
+        }
+      );
     });
   }
 
@@ -72,8 +80,4 @@ export class ApiService {
       });
     });
   }
-
-
-  
-
 }

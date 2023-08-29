@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Game } from 'src/classes/game/game';
+import { Player } from 'src/classes/player/player';
 
 @Injectable()
 export class GamesService {
@@ -11,13 +12,36 @@ export class GamesService {
         this.liveGames = [];
     }
 
+    public registerPlayer(username: string, gameCode: string): boolean {
+        console.log(`Registering player ${username} in game ${gameCode}`);
+        // Find the game with the given game code
+        const game = this.getGame(gameCode);
+
+        // If the game doesn't exist, return false
+        if (!game) {
+            console.log(`Game ${gameCode} does not exist`);
+            return false;
+        }
+
+        // Add the player to the game
+        try {
+            game.addPlayer(new Player(username));
+        } catch (error) {
+            console.log(error.message);
+            return false;
+        }
+
+        return true;        
+    }
+
+
     /**
      * Get a specific game
      * @param gameCode The game's unique code
      * @returns The game with the specified game code
      */
     public getGame(gameCode: string): Game {
-        return this.games.find(game => game.gameCode === gameCode);
+        return this.games.find(game => game.code === gameCode);
     }
 
     /**
@@ -48,6 +72,7 @@ export class GamesService {
 
         // Listen to the game's isLive property
         game.isLive.subscribe(isLive => {
+            console.log(`Game ${game.code} is live: ${isLive}`);
             if (isLive) {
                 this.liveGames.push(game);
             } else {
@@ -71,7 +96,7 @@ export class GamesService {
         }
 
         // Check if the game code is already in use
-        if (this.games.find(game => game.gameCode === result)) {
+        if (this.games.find(game => game.code === result)) {
             return this.generateGameCode();
         }
 

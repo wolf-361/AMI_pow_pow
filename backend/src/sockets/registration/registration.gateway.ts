@@ -1,21 +1,20 @@
 import { ConnectedSocket, MessageBody, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
 import { Player } from 'src/classes/player/player';
-import { PlayersService } from 'src/services/players/players.service';
+import { GamesService } from 'src/services/games/games.service';
 
 @WebSocketGateway()
 export class RegistrationGateway {
 
   constructor(
-    private playersService: PlayersService,
+    private gamesService: GamesService,
   ) {}
 
   @SubscribeMessage('registerPlayer')
   handleMessage(
-    @MessageBody() username: string
+    @MessageBody() data: { username: string, gameCode: string },
     ): boolean {
-    const player = new Player(username);
-
-    return this.playersService.addPlayer(player);
+    const { username, gameCode } = data;
+    return this.gamesService.registerPlayer(username, gameCode);
   }
 }
