@@ -1,8 +1,10 @@
+import { Logger } from '@nestjs/common';
 import { MessageBody, SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { GamesService } from 'src/services/games/games.service';
 
 @WebSocketGateway()
 export class SendPlayerScoreGateway {
+  private logger: Logger = new Logger('SendPlayerScoreGateway');
   private scoreMultiplier = 100;
 
   constructor(
@@ -25,6 +27,7 @@ export class SendPlayerScoreGateway {
     }
 
     player.score = score * this.scoreMultiplier;
+    this.logger.log(`Player ${username} has scored ${player.score} points`);
 
     return true;
   }

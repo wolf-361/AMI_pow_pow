@@ -102,20 +102,20 @@ export class ApiService {
 
   /**
    * Send the player score to the server
-   * @param playerId Player ID
+   * @param username Player ID
    * @param gameCode Game code
    * @param score Number of taps
    * @returns True if the player score was sent successfully
    */
   public sendPlayerScore(
-    playerId: string,
+    username: string,
     gameCode: string,
     score: number
   ): Promise<boolean> {
     return new Promise((resolve, reject) => {
       this.socket.emit(
         'sendPlayerScore',
-        { playerId: playerId, score: score },
+        { username: username, gameCode: gameCode, score: score },
         (success: boolean) => {
           resolve(success);
         }

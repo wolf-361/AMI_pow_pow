@@ -1,7 +1,19 @@
 <div class="countdown">
-    <h1 *ngIf="this.counter === 0; else attente" class="mat-headline-2">Préparer vous la partie commencera bientôt</h1>
+    <h1 *ngIf="this.counter === 0 && !this.countingScore" class="mat-headline-2">Préparer vous la partie commencera bientôt</h1>
+
+    <div *ngIf="this.counter != 0">
+        <h1 class="mat-headline-2">
+            Tapper l'écran aussi rapidement que possible dans
+        </h1>
+        <h1 class="mat-headline-2">
+            {{ this.counter }}
+        </h1>
+    </div>
+
+    <div *ngIf="this.countingScore">
+        <h1 class="mat-headline-2">Tapper pour augmenter votre score</h1>
+        <h1 class="mat-headline-2">
+            {{ this.score }}
+        </h1>
+    </div>
 </div>
-<ng-template #attente>
-    <h1 class="mat-headline-2">Tapper l'écran aussi rapidement que possible dans: </h1>
-    <h1 class="mat-headline-2">{{ this.counter }}</h1>
-</ng-template>
