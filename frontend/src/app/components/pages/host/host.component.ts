@@ -52,9 +52,13 @@ export class HostComponent implements OnInit {
 
           // Check if the game is finished (every score is not 0)
           this.isGameFinished = scores.every((score: { username: string, score: number }) => {
-            clearInterval(this.gameInterval);
             return score.score !== 0;
           });
+
+          if (this.isGameFinished) {
+            // Clear the interval
+            clearInterval(this.gameInterval);
+          }
           
           // Check if the game is started (at least one score is not 0)
           this.isGameStarted = scores.some((score: { username: string, score: number }) => {
