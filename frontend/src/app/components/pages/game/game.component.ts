@@ -51,8 +51,8 @@ export class GameComponent implements OnInit {
             // Send the score to the server
             this.apiService.sendPlayerScore(this.username, this.gameCode, score).then((success: boolean) => {
               if (success) {
-                // Redirect to the scoreboard
-                window.location.href = '/scoreboard/' + this.gameCode;
+                // Redirect to a new game
+                window.location.href = '/game/' + this.gameCode + '/' + this.username;
               } else {
                 alert('An error occurred. Please try again.');
               }

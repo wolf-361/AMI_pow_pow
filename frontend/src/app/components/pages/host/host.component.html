@@ -45,8 +45,7 @@
     </ng-template>
   </div>
  
-  <button mat-raised-button color="accent" (click)="restartGame()" [disabled]="!this.isGameFinished">Jouer une autre partie</button>
-  <button mat-raised-button color="primary" (click)="restartGame()" [disabled]="!this.isGameFinished">Ignorer les joueurs manquant</button>
+  <button mat-raised-button color="accent" (click)="restartGame()" [disabled]="!this.isGameStarted">Jouer une autre partie</button>
   
   <div class="spacer"></div>
 </div>

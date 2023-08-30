@@ -11,7 +11,10 @@ export class HostComponent implements OnInit {
   public players?: { username: string }[];
   public scores?: { username: string, score: number }[];
   public isGameFinished: boolean = false;
- 
+  public isGameStarted: boolean = false;
+
+  private gameInterval: any;
+
   constructor(
     private apiService: ApiService
     ) { }
@@ -42,15 +45,21 @@ export class HostComponent implements OnInit {
     });
 
     // Once the game is started, show the score board and update it every second
-    setInterval(() => {
+    this.gameInterval = setInterval(() => {
       this.apiService.getGameScores(this.gameCode).then((scores: { username: string, score: number }[]) => {
         if (scores.length > 0) {
           this.scores = scores;
 
           // Check if the game is finished (every score is not 0)
           this.isGameFinished = scores.every((score: { username: string, score: number }) => {
+            clearInterval(this.gameInterval);
             return score.score !== 0;
-          });          
+          });
+          
+          // Check if the game is started (at least one score is not 0)
+          this.isGameStarted = scores.some((score: { username: string, score: number }) => {
+            return score.score !== 0;
+          });
         }
       });
     }, 1000);
@@ -61,6 +70,12 @@ export class HostComponent implements OnInit {
     this.players = undefined;
     this.scores = undefined;
     this.isGameFinished = false;
+    this.isGameStarted = false;
+
+    // Clear the interval
+    if (this.gameInterval) {
+      clearInterval(this.gameInterval);
+    }
 
     // Reset the players scores
     this.apiService.resetGame(this.gameCode).then((success: boolean) => {
