@@ -5,7 +5,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { environment as env } from '../environments/environment';
 
-const config: SocketIoConfig = { url: env.socketUrl, options: {} };
+const config: SocketIoConfig = { url: env.socketUrl, options: {
+  path: env.socketPath
+} };
 
 // Forms
 import { FormsModule } from '@angular/forms';

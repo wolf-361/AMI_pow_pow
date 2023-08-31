@@ -1,4 +1,5 @@
 export const environment = {
     production: false,
-    socketUrl: 'http://localhost:3000'
+    socketUrl: 'http://localhost:3000',
+    socketPath: '/socket.io'
 };
