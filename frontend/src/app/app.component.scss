@@ -1,0 +1,42 @@
+div {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.main-toolbar {
+  height: var(--toolbar-height);
+}
+
+.mobile .main-toolbar {
+  // Want toolbar to be fixed when on mobile
+  position: fixed;
+  z-index: 2;
+}
+
+div .sidenav-container {
+  // When the sidenav is not fixed, stretch the sidenav container to fill the available space. This causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts.
+  flex: 1;
+}
+
+.logo {
+  // Center
+  margin: auto;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: #3f3f3f;
+}
+
+.nav-item {
+  margin: 0 16px;
+}
+
+.mobile .sidenav-container {
+  // Want body to be scrollable when on mobile
+  flex: 1 0 auto;
+}

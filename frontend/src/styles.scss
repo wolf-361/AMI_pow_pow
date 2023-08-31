@@ -1,0 +1,12 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+html {
+    --footer-height: 2rem;
+    --toolbar-height: 4rem;
+    --page-height: calc(100vh - var(--footer-height) - var(--toolbar-height));
+}

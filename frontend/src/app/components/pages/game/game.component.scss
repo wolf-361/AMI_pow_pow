@@ -1,0 +1,26 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: var(--page-height)
+}
+
+.countdown {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 50%;
+}
+
+// Make the countdown timer bigger on mobile
+@media screen and (max-width: 900px) {
+    .countdown {
+        width: 80%;
+    }
+}

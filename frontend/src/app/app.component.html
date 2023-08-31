@@ -1,0 +1,28 @@
+<div class="mat-app-background" [class.mobile]="mobileQuery.matches">
+
+    <mat-toolbar color="primary" class="main-toolbar">
+        <button mat-icon-button (click)="sidenav.toggle()"><mat-icon>menu</mat-icon></button>
+        <h1>Pow Pow</h1>
+    </mat-toolbar>
+
+    <mat-sidenav-container class="sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+        
+        <mat-sidenav #sidenav [mode]="this.mobileQuery.matches ? 'over' : 'side'">
+            <a href="https://ami.uqtr.ca/">
+                <img src="assets/images/logo.png" alt="Logo de l'ami" class="logo">
+            </a>
+            
+            <mat-nav-list>
+                <a mat-list-item  *ngFor="let link of navLinks" [routerLink]="link.path" routerLinkActive="active" class="navlink">
+                    <mat-icon class="nav-item">{{link.icon}}</mat-icon>
+                    <span class="nav-item">{{ link.label }}</span>
+                </a>
+            </mat-nav-list>
+        </mat-sidenav>
+
+        <mat-sidenav-content>
+            <router-outlet></router-outlet>
+            <app-footer></app-footer>
+        </mat-sidenav-content>    
+    </mat-sidenav-container>
+</div>

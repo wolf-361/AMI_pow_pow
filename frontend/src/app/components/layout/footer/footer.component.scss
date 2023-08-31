@@ -1,0 +1,29 @@
+
+
+:host {
+    display: block;
+    width: 100%;
+    height: var(--footer-height);
+    position: relative;
+    bottom: var(--footer-height)
+}
+
+footer {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+footer span {
+    opacity: 60%;
+}
+
+footer a {
+    text-decoration: none;
+    color: inherit;
+    opacity: 60%;
+    transform: opacity 0.2s ease-in-out;
+}
+
+footer a:hover {
+    opacity: 100%;
+}

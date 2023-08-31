@@ -1,0 +1,13 @@
+<form [formGroup]="this.gameForm" (ngSubmit)="this.submit()">
+    <mat-form-field appearance="outline">
+        <mat-label>Entre votre nom d'utilisateur</mat-label>
+        <input matInput type="text" formControlName="username" placeholder="ex. wolf-361">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Entrer votre numéro de partie</mat-label>
+        <input matInput type="text" formControlName="gameCode" placeholder="SAEX">
+    </mat-form-field>
+
+    <button type="submit" mat-raised-button color="primary">Rejoindre la partie</button>
+</form>
