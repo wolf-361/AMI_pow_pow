@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { ApiService } from 'src/app/services/api/api.service';
 
@@ -24,7 +24,8 @@ export class GameComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
     private apiService: ApiService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -36,7 +37,7 @@ export class GameComponent implements OnInit {
     // If the game code is not valid, redirect to the home page
     // TODO: Check if the game exists
     if (this.gameCode.length !== 4 || !this.gameCode.match('^[a-zA-Z0-9]*$')) {
-      window.location.href = '/';
+      this.router.navigate(['/']);
     }
 
     // Subscribe to game start
@@ -52,7 +53,7 @@ export class GameComponent implements OnInit {
             this.apiService.sendPlayerScore(this.username, this.gameCode, score).then((success: boolean) => {
               if (success) {
                 // Redirect to a new game
-                window.location.href = '/game/' + this.gameCode + '/' + this.username;
+                this.router.navigate(['/game', this.gameCode, this.username]);
               } else {
                 alert('An error occurred. Please try again.');
               }

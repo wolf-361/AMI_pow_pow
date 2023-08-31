@@ -16,7 +16,7 @@ export class HostComponent implements OnInit {
   private gameInterval: any;
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
     ) { }
 
   ngOnInit(): void {

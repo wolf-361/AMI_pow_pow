@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api/api.service';
 
 @Component({
@@ -34,6 +35,7 @@ export class JoinGameComponent {
 
   constructor(
     private apiService: ApiService,
+    private router: Router,
   ) { }
 
   public submit(): void {
@@ -52,7 +54,7 @@ export class JoinGameComponent {
       }
 
       // Redirect to game
-      window.location.href = `/game/${gameCode}/${username}`;
+      this.router.navigate(['/game', gameCode, username]);
     });
   }
 }
