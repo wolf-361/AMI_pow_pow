@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Docker image for production
+name: Frontend docker image for production
 
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
@@ -16,7 +16,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE_NAME: ${{ github.repository }}-front
 
 jobs:
   build-and-push:
@@ -71,5 +71,5 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-front:stable-lastest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-front:stable-${{ env.TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:stable-lastest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:stable-${{ env.TAG }}
