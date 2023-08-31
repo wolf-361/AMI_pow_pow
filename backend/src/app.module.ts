@@ -26,7 +26,10 @@ import { ResetGameGateway } from './sockets/reset-game/reset-game.gateway';
     RegistrationGateway,
     GamesService, 
     GetGamePlayersGateway, 
-    StartGameGateway, SendPlayerScoreGateway, GetGameScoresGateway, ResetGameGateway,
+    StartGameGateway, 
+    SendPlayerScoreGateway, 
+    GetGameScoresGateway,
+    ResetGameGateway, 
   ]
 })
 export class AppModule {}

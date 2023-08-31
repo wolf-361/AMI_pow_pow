@@ -18,7 +18,7 @@ export class SendPlayerScoreGateway {
 
     if (!game) {
       return false;
-    }
+    } 
 
     const player = game.getPlayer(username);
 

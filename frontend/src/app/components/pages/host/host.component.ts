@@ -28,15 +28,18 @@ export class HostComponent implements OnInit {
     setInterval(() => {
       this.apiService.getGamePlayers(this.gameCode).then((players: string[]) => {
         if (players.length > 0) {
-          // Update the players list by adding a number to each player
+          // Update the players list
           this.players = players.map((player: string) => {
             return { username: player };
           });
         }
-      });
+      })
     }, 2000);
   }
 
+  /**
+   * 
+   */
   public startGame(): void {
     this.apiService.startGame(this.gameCode).then((success: boolean) => {
       if (!success) {

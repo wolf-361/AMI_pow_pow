@@ -11,12 +11,12 @@ export class GetGamePlayersGateway {
   ) {}
 
   @SubscribeMessage('getGamePlayers')
-  handleMessage(@MessageBody() gameCode: string): string[] {
+  handleMessage(@MessageBody() gameCode: string): string[] | Error {
     const game = this.gamesService.getGame(gameCode);
 
     if (!game) {
       this.logger.error(`Game with code ${gameCode} not found`);
-      return;
+      return new Error('Game not found')
     }
 
     return game.players.map(player => player.username);
