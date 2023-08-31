@@ -1,0 +1,22 @@
+version: '3.3'
+
+services:
+  api:
+    image: api
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: prod
+    ports:
+      - 127.0.0.1:10690:3000
+    
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 127.0.0.1:10069:80
+    depends_on:
+      - api
+

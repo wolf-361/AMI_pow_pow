@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    socketUrl: 'http://localhost:3000'
+    socketUrl: 'https://ami.uqtr.ca/pow-pow-api/'
 };
