@@ -16,7 +16,7 @@ env:
   # Use docker.io for Docker Hub if empty
   REGISTRY: ghcr.io
   # github.repository as <account>/<repo>
-  IMAGE_NAME: ${{ github.repository }}-front
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
@@ -71,5 +71,5 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           tags: |
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:stable-lastest
-            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:stable-${{ env.TAG }}
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:front-stable-lastest
+            ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:front-stable-${{ env.TAG }}
